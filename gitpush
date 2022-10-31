@@ -1,7 +1,0 @@
-#!/usr/bin/bash
-git init
-git add README.md
-git commit -m $*
-git branch -M main
-git remote add origin https://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@github.com/amoyinoluwa/AirBnB_clone.git
-git push -u origin main
