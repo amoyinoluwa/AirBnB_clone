@@ -1,23 +1,39 @@
 #!/usr/bin/python3
+"""
+The HBNB command console
+Version: 1.0
+""" 
+
+
 from models.base_model import BaseModel
 import cmd, shlex, models
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
-"""The HBNB command console"""
 
 class HBNBCommand(cmd.Cmd):
-    """The HBNBCommand class is a limited-use command line interpreter for manipulating objects"""
+    """
+    The HBNBCommand class is a limited-use command line interpreter for manipulating objects
+    """
+    
     prompt = '(hbnb) '
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel and prints the id"""
         if not arg:
             print("** class name missing **")
-        elif arg not in globals():
-            print("** class doesn't exist **")
         else:
-            arg = BaseModel()
-            arg.save()
-            print(arg.id)
+            if arg not in globals():
+                print("** class doesn't exist **")
+            else:
+                newObject = eval(arg)()
+                newObject.save()
+                print(newObject.id)
 
     def do_show(self, arg):
         """Prints the string representation of an instance based on the class name and id"""
