@@ -2,11 +2,13 @@
 """
 The HBNB command console
 Version: 1.0
-""" 
+"""
 
 
 from models.base_model import BaseModel
-import cmd, shlex, models
+import cmd
+import shlex
+import models
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -18,9 +20,10 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """
-    The HBNBCommand class is a limited-use command line interpreter for manipulating objects
+    The HBNBCommand class is a limited-use command
+    line interpreter for manipulating objects
     """
-    
+
     prompt = '(hbnb) '
 
     def do_create(self, arg):
@@ -36,7 +39,8 @@ class HBNBCommand(cmd.Cmd):
                 print(newObject.id)
 
     def do_show(self, arg):
-        """Prints the string representation of an instance based on the class name and id"""
+        """Prints the string representation of
+        an instance based on the class name and id"""
         if not arg:
             print("** class name missing **")
         else:
@@ -71,7 +75,8 @@ class HBNBCommand(cmd.Cmd):
                     print("** no instance found **")
 
     def do_update(self, arg):
-        """Updates an instance based on the class name and id by adding or updating attribute"""
+        """Updates an instance based on the class
+        name and id by adding or updating attribute"""
         if not arg:
             print("** class name missing **")
         else:
@@ -94,12 +99,12 @@ class HBNBCommand(cmd.Cmd):
                         if '.' in arg:
                             try:
                                 arg = float(arg)
-                            except:
+                            except ValueError:
                                 pass
                         else:
                             try:
                                 arg = int(arg)
-                            except:
+                            except ValueError:
                                 pass
                         setattr(obj, args[2], arg)
                         models.storage.save()
@@ -116,7 +121,7 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         pass
-    
+
     def do_all(self, arg):
         """Prints string representations of instances"""
         if not arg:
@@ -131,6 +136,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
             else:
                 print(result)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

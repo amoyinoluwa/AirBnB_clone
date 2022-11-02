@@ -9,6 +9,7 @@ import models
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
 
+
 class BaseModel:
     """ Represent a class BaseModel that defines
     all common attributes/methods for other classes """
@@ -29,18 +30,21 @@ class BaseModel:
             if kwargs.get("id", None) is None:
                 self.id = str(uuid.uuid4())
         else:
-            """Initializes the unique id for each BaseModel"""    
+            """Initializes the unique id for each BaseModel"""
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
             models.storage.new(self)
-        
+
     def __str__(self):
         """prints model"""
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
-    
+        class_name = self.__class__.__name__
+        res  = "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
+        return res
+
     def save(self):
-        """updates the public instance attribute `updated_at with 
+        """
+        updates the public instance attribute `updated_at with
         the current datetime
         """
         self.updated_at = datetime.now()
